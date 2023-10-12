@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Dialogos {% endblock %}
+
+{% block contenido %}
+<section class="flex flex-col items-center justify-center px-20 py-12 text-white bg-gradient-to-r from-sky-800 from-10% via-s-600 via-70% to-slate-200 to-90%">
+
+    <h1 class="text-center text-2xl font-bold mt-4 mb-8" style="font-family: 'Game of Thrones';">Generar  dialogo  entre  dos  personajes  que  esten  en  la  base  de  datos</h1>
+
+    <form method="POST" action="/dialogo" class="flex flex-col items-center justify-center px-20 pt-6 text-white bg-sky-700 rounded-lg shadow-lg">
+        <h2 class="text-center text-2xl font-bold mt-4 mb-8">⚔️ Personaliza tu dialogo ⚔️</h2>
+        
+        <div class="pb-4 text-center">
+            <label for="personaje1">Personaje 1     </label>
+            <select name="personaje1" id="personaje1" class="bg-sky-900 rounded-lg">
+                {% for miembro in todos_los_miembros %}
+                    <option value="{{ miembro.id }}">{{ miembro.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="pb-4">
+            <label for="personaje2">Personaje 2     </label>
+            <select name="personaje2" id="personaje2" class="bg-sky-900 rounded-lg">
+                {% for miembro in todos_los_miembros %}
+                    <option value="{{ miembro.id }}">{{ miembro.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="pb-4">
+            <label for="cond2">Longitud del diálogo     </label>
+            <input type="text" name="cond2" id="cond2" required class="bg-sky-900 rounded-lg">
+        </div>
+        <div class="pb-4">
+            <label for="cond1">Tono de conversacion (humor, seriedad, etc.)     </label>
+            <input type="text" name="cond1" id="cond1" required class="bg-sky-900 rounded-lg">
+        </div>
+
+        <input class="my-8 bg-gradient-to-r from-sky-900 from-20% via-sky-600 via-70% to-slate-400 to-90% hover:bg-sky-200 text-white font-bold py-2 px-4 rounded-full"" type="submit" value="Generar Diálogo">
+    </form>
+
+    <!--  imprimir respuesta  -->
+    <div class="px-16 py-12 mx-20 mt-10 font-bold text-white bg-sky-700 rounded-lg shadow-lg">
+        <h2 class="text-center text-2xl font-bold mt-4 mb-8">⚔️ Dialogo Generado ⚔️</h2>
+        {% if dialogo %}
+            <p>{{ dialogo }}</p>
+        {% endif %}
+    </div>
+
+</section>
+{% endblock %}
